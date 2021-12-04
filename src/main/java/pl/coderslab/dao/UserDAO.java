@@ -14,13 +14,13 @@ public class UserDAO {
     private static final String UPDATE_QUERY = "update users set email = ?,username = ?, password = ? where id = ?;";
     private static final String SHOWALL_QUERY = "SELECT * from users";
 
-    public static User create(User user) {
+    public User create(User user) {
         try (Connection conn = DBUtil.getConnection()) {
             PreparedStatement statement =
                     conn.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getEmail());
-            statement.setString(3, BCrypt.hashpw(User.getPassword(), BCrypt.gensalt()));
+            statement.setString(3, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             statement.executeUpdate();
             System.out.println("User created");
             ResultSet resultSet = statement.getGeneratedKeys();
@@ -102,7 +102,7 @@ public class UserDAO {
             preparedStatement.setInt(4, user.getId());
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getUserName());
-            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(3, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             preparedStatement.executeUpdate();
 
 

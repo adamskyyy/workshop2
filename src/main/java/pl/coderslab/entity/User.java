@@ -1,40 +1,38 @@
 package pl.coderslab.entity;
 
 public class User {
-    private static int id = 0;
-    private static String email = null;
-    private static String username = null;
-    private static String password = null;
+    private int id = 0;
+    private String email = null;
+    private String username = null;
+    private String password = null;
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 
-    public static void setId(int id) {
-        User.id = id;
-    }
+    public void setId(int id) {this.id = id;}
 
-    public static String getEmail() {
+    public  String getEmail() {
         return email;
     }
 
-    public static void setEmail(String email) {
-        User.email = email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public static void setUsername(String username) {
-        User.username = username;
+    public String getUserName() {return username;}
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public static void setPassword(String password) {
-        User.password = password;
-    }
-
-    public static String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public static String getUserName() {return username;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
 }
 
