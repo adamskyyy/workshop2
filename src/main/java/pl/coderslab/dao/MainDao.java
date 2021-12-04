@@ -10,8 +10,24 @@ import java.util.Arrays;
 public class MainDao {
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(UserDAO.showUsers()));
+        try (Connection connection = DBUtil.getConnection()) {
+            User userUpdate = new User();
+            userUpdate = UserDAO.showUser(1);
+            userUpdate.setUsername("test2");
+            userUpdate.setEmail("test2@test.pl");
+            userUpdate.setPassword("test2");
+            UserDAO.update(userUpdate);
 
+//            UserDAO.create(user);
+//            UserDAO.showUsers();
+//            UserDAO.remove(4);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 }
+
+
+
+

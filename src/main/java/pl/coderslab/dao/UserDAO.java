@@ -82,6 +82,10 @@ public class UserDAO {
                 System.out.println("Email: " + email);
                 System.out.println("Username: " + username);
                 System.out.println("Password: " + pw);
+                user.setId(resultSet.getInt("id"));
+                user.setUsername(resultSet.getString("username"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
                 return user;
             }
 
@@ -95,10 +99,10 @@ public class UserDAO {
     public static void update(User user) {
         try (Connection connection = DBUtil.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
+            preparedStatement.setInt(4, user.getId());
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getUserName());
             preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setInt(4, user.getId());
             preparedStatement.executeUpdate();
 
 
@@ -125,6 +129,7 @@ public class UserDAO {
             user.setUsername(resultSet.getString("username"));
             user.setPassword(resultSet.getString("password"));
             users = addToArray(user,users);
+            System.out.println(String.valueOf(user.getId())+" "+ user.getEmail()+" "+ user.getUserName()+" "+user.getPassword());
         }
         return users;
 
